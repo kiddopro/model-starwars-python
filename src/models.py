@@ -26,39 +26,60 @@ Base = declarative_base()
 #     person_id = Column(Integer, ForeignKey('person.id'))
 #     person = relationship(Person)
 
-    class Character(Base):
-        __tablename__ = 'character'
-        id = Column(Integer, primary_key=True)
-        uid = Column(String(4))
-        name = Column(String(250))
-        height = Column(String(250))
-        mass = Column(String(250))
-        hair_color = Column(String(250))
-        eye_color = Column(String(250))
-        birth_year = Column(String(250))
-        gender = Column(String(250))
-        description = Column(String(250))
+class Character(Base):
+    __tablename__ = 'character'
+    id = Column(Integer, primary_key=True)
+    uid = Column(String(4))
+    name = Column(String(250))
+    height = Column(String(250))
+    mass = Column(String(250))
+    hair_color = Column(String(250))
+    eye_color = Column(String(250))
+    birth_year = Column(String(250))
+    gender = Column(String(250))
+    description = Column(String(250))
 
 
-    class Planet(Base):
-        __tablename__ = 'planet'
-        id = Column(Integer, primary_key=True)
-        uid = Column(String(4))
-        name = Column(String(250))
-        diameter = Column(String(250))
-        population = Column(String(250))
-        terrain = Column(String(250))
-        climate = Column(String(250))
-        surface_water = Column(String(1))
-        rotation_period = Column(String(250))
-        orbital_period = Column(String(250))
-
+class Planet(Base):
+    __tablename__ = 'planet'
+    id = Column(Integer, primary_key=True)
+    uid = Column(String(4))
+    name = Column(String(250))
+    diameter = Column(String(250))
+    population = Column(String(250))
+    terrain = Column(String(250))
+    climate = Column(String(250))
+    surface_water = Column(String(1))
+    rotation_period = Column(String(250))
+    orbital_period = Column(String(250))
+    
+    
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
     name = Column(String(250))
     password = Column(String(250))
     email = Column(String(250))
+
+
+
+class Favorites_Planet(Base):
+    __tablename__ = 'favorites_planet'
+    id = Column(Integer, primary_key=True)
+    userID = Column(Integer, ForeignKey('user.id'))
+    planetID = Column(Integer, ForeignKey('planet.id'))
+    user = relationship(User)
+    planet = relationship(Planet, backref='planet')
+
+
+class Favorites_Character(Base):
+    __tablename__ = 'favorites_character'
+    id = Column(Integer, primary_key=True)
+    userID = Column(Integer, ForeignKey('user.id'))
+    characterID = Column(Integer, ForeignKey('character.id'))
+    user = relationship(User)
+    character = relationship(Character, backref='character')
+
 
     def to_dict(self):
         return {}
