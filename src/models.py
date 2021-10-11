@@ -29,6 +29,7 @@ Base = declarative_base()
     class Character(Base):
         __tablename__ = 'character'
         id = Column(Integer, primary_key=True)
+        uid = Column(String(4))
         name = Column(String(250))
         height = Column(String(250))
         mass = Column(String(250))
@@ -42,7 +43,22 @@ Base = declarative_base()
     class Planet(Base):
         __tablename__ = 'planet'
         id = Column(Integer, primary_key=True)
+        uid = Column(String(4))
+        name = Column(String(250))
+        diameter = Column(String(250))
+        population = Column(String(250))
+        terrain = Column(String(250))
+        climate = Column(String(250))
+        surface_water = Column(String(1))
+        rotation_period = Column(String(250))
+        orbital_period = Column(String(250))
 
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250))
+    password = Column(String(250))
+    email = Column(String(250))
 
     def to_dict(self):
         return {}
