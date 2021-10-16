@@ -38,6 +38,7 @@ class Character(Base):
     birth_year = Column(String(250))
     gender = Column(String(250))
     description = Column(String(250))
+    favorite_character = relationship('Favorites_Character', backref="favorites_character")
 
 
 class Planet(Base):
@@ -52,6 +53,7 @@ class Planet(Base):
     surface_water = Column(String(1))
     rotation_period = Column(String(250))
     orbital_period = Column(String(250))
+    favorite_planet = relationship('Favorites_Planet', backref="favorites_planet")
     
     
 class User(Base):
@@ -60,6 +62,8 @@ class User(Base):
     name = Column(String(250))
     password = Column(String(250))
     email = Column(String(250))
+    favorite_planet = relationship('Favorites_Planet', backref="favorites_planet")
+    favorite_character = relationship('Favorites_Character', backref="favorites_character")
 
 
 
